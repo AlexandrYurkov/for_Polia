@@ -1,42 +1,38 @@
-NAME		=	minishell
+NAME = mimishell
 
-HEADER		=	minishell.h
+REBUILT_FUNCS = ./sanya_funcs/ft_cd.c \
+					./sanya_funcs/ft_echo.c \
+					./sanya_funcs/ft_env.c \
+					./sanya_funcs/ft_exit.c \
+					./sanya_funcs/ft_export.c \
+					./sanya_funcs/ft_pwd.c \
+					./sanya_funcs/ft_unset.c \
 
-SRCS		= 	for_sanya.c \
-				ft_split.c \
-				listfun.c \
-				utils.c \
-				swap_val_list.c \
-				free_list.c \
-				ft_unset.c \
-				ft_export.c \
-				ft_env.c \
-				ft_cd.c \
-				ft_pwd.c \
-				ft_echo.c \
-				ft_exit.c
+SRC = main.c env_copy.c env_list_tools.c swap_val_list.c parser.c errors.c string_cutters.c quotes.c dollar.c list_tools.c pipe_executor.c $(REBUILT_FUNCS)
 
-OBJS		=	$(SRCS:.c=.o)
+OBJS = $(SRC:.c=.o)
 
-FLAGS		=	-Wall -Wextra -Werror -g 
-CC			=	gcc
-GCC			=	$(CC) -g #$(FLAGS)
+FLAGS = -Wall -Werror -Wextra -lreadline -g
+LFLAGS = -L $(LDIR) -lft
+LDIR = ./libft/
 
+HEADER	= minishell.h libft/libft.h
 
-all:			$(NAME)
+all: $(NAME)
+			make -C ${LDIR}
 
-%.o:			%.c $(HEADER)
-				$(GCC) -c -o $@ $<
- 
-$(NAME):		$(OBJS)
-				$(GCC) $(OBJS) -o $(NAME)
+$(NAME): $(OBJS) $(HEADER)
+	make -C $(LDIR)
+	clang -o $(NAME) $(FLAGS) $(OBJS) $(LFLAGS)
 
-clean:				
-				rm -f $(OBJS)
-			
-fclean:			clean
-				rm -f $(NAME)
+clean:
+	make clean -C $(LDIR)
+	rm -f $(OBJS) 
 
-re:				fclean $(NAME)
+fclean: clean
+	make fclean -C $(LDIR)
+	rm -f $(NAME) 
 
-.PHONY:			all clean fclean re
+re: fclean all
+
+.PHONY: all, clean, fclean, re
