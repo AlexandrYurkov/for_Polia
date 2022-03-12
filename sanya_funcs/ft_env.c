@@ -5,9 +5,9 @@ void ft_env_next_step(t_envp *envp)
     t_envp *tmp;
     tmp = envp;
 
-    while(tmp->next)
+    while (tmp)
     {
-        if(tmp->value == NULL)
+        if (tmp->value == NULL)
             tmp = tmp->next;
         else
         {
@@ -21,11 +21,12 @@ void ft_env(t_envp *envp, char **argv)
 {
     int i;
 
+    // test_prinrt(envp);
     i = array_len(argv);
-    if(i >= 1)
+    if (i >= 1)
     {
         printf("env: ‘%s’: No such file or directory\n", argv[1]);
-        data.exit_status = 127;
+        // data->exit_status = 127;
         return ;
     }
     else

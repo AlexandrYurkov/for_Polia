@@ -10,19 +10,16 @@ int syntax_errors(char *str)
         if (str[0] == '|')
         {
             printf("minishell: syntax error near unexpected token `|'\n");
-            free(str);
             return (1);
         }
         else if (str[i] == '|' && str[i + 1] == '\0')
         {
             printf("minishell: error: no command after pipe\n");
-            free(str);
             return (1);
         }
         else if ((str[i] == '>' || str[i] == '<') && str[i + 1] == '|')
         {
             printf("minishell: syntax error near unexpected token `|'\n");
-            free(str);
             return (1);
         }
     }
@@ -42,7 +39,7 @@ int redir_syntax_errors(char *str)
         {
                 printf("minishell: syntax error near unexpected token `newline'\n");
                 return (1);
-            }
+        }
         if (str[i] == '>')
         {
             i++;
@@ -64,6 +61,11 @@ int redir_syntax_errors(char *str)
         }
         else if (str[i] == '<')
         {
+            if (str[i + 1] == '<' && str[i + 2] == '\0')
+            {
+                printf("minishell: syntax error near unexpected token `newline'\n");
+                return (1);
+            }
             c = 0;
             while (str[i] == '<')
             {
