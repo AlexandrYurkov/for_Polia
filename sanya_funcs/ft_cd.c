@@ -36,6 +36,7 @@ int check_pwd(t_envp *envp)
     }
     return (i);
 }
+
 char *cd_home(t_envp *envp)
 {
     t_envp *home;
@@ -56,7 +57,10 @@ void change_envp_value(t_envp *envp, char *name, char *value)
 {
     envp = search_name(envp, name);
     if (envp)
+    {
+        free (envp->value);
         envp->value = value;
+    }
 }
 
 void ft_cd_next_step(t_envp *envp, char *command) // добавить пременую команды, можно добавить сюда переменную о сообщении, или сделать их макросоми

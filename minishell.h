@@ -170,13 +170,14 @@ char    *ft_strjoin2(char *s1, char *s2);
 int size_list(t_envp *envp);
 
 void	ft_shlvl(t_envp *envp);
+int lookup_name_replace_value(t_envp *envp, char **value);
 
 // signal
 void	signal_handler(int sig);
 void	par_set_default_sig();
 void	par_set_custom_sig(void);
 void	par_disable_sig(void);
-void	par_sig_init();
+void	sig_init();
 void	sig_handler_child(int sig_num);
 
 

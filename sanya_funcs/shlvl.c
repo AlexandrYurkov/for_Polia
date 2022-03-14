@@ -48,18 +48,18 @@ int lookup_name_replace_value(t_envp *envp, char **value)//функция пои
     int i;
 
     tmp = (char **)malloc(sizeof(char *) * 2);
-    if(value[1])
+    if (value[1])
     {
         printf("minishell: %s: command not found\n", value[1]);
         data.exit_status = 127;
         return (0);
     }
     i = ft_strchr(value[0], '=');
-    if(i == 0)
+    if (i == 0)
         return (0);
     tmp = ft_split(value[0], '=');
     envp = search_name(envp, tmp[0]);
-    if(!envp)
+    if (!envp)
     {
         free_mass(tmp);
         return (0);
@@ -79,7 +79,7 @@ int check_value(char *str)
     
     while (str[i])
     {
-        if(!ft_isdigit_char(str[i]));
+        if (ft_isdigit_char(str[i]))
             return (1);
         i++;
     }
@@ -93,19 +93,20 @@ void ft_shlvl(t_envp *envp)
     int check;
     char *tmp;
 
+    data.exit_status = 0;
     envp = search_name(envp, "SHLVL");
-    if(!envp)
+    if (!envp)
     {
         push_back("SHLVL", NULL, envp);
         return ;
     }
-    if(!envp->value)
+    if (!envp->value)
     {
         envp->value = ft_itoa(0);
         return ;
     }
     check = check_value(envp->value);
-    if(check == 0)
+    if (check == 0)
     {
         envp->value = ft_itoa(1);
         return ;
@@ -113,12 +114,12 @@ void ft_shlvl(t_envp *envp)
     else
     {
         i = ft_atoi(envp->value) + 1;
-        if(i == 1000)
+        if (i == 1000)
         {
             envp->value = NULL;
             return ;
         }
-        if(i >= 1001)
+        if (i >= 1001)
         {
             printf("minishell: warning: shell level (1001) too high, resetting to 1\n");
             envp->value = ft_itoa(1);

@@ -54,7 +54,6 @@ void pipe_cmd_proc(t_list *list, t_envp *envp, t_data *data)
 
 	if (list->cmd[0] == NULL)
 		return ;
-	//printf("vvvvvvvv");
 	if (list->next == NULL && check_my_cmd(list->cmd))
 	{
 		exec_my_single_cmd(list, envp);

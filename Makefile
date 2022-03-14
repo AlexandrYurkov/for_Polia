@@ -1,4 +1,4 @@
-NAME = mimishell
+NAME = minishell
 
 REBUILT_FUNCS = ./sanya_funcs/ft_cd.c \
 					./sanya_funcs/ft_echo.c \
