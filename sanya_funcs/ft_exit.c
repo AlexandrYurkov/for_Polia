@@ -83,8 +83,8 @@ int array_len(char **av)
 
 void ft_out(int value, int flag, char *av)
 {
-    // rl_clear_history();
-    // data->exit_status = (unsigned char)value;
+    rl_clear_history();
+    data.exit_status = (unsigned char)value;
     printf("exit\n");
     if (flag == 1)
         printf("bash: exit: %s: numeric argument required\n", av);
@@ -109,9 +109,9 @@ void ft_exit(char **av)
     str = check_bracket(av);
     if (str)
     {
-        printf("bash: syntax error near unexpected token `%s'\n", str);
+        printf("minishell: syntax error near unexpected token `%s'\n", str);
         free(str);
-        // data->exit_status = 258;
+        data.exit_status = 258;
         exit(258);
     }
     if (i >= 1)

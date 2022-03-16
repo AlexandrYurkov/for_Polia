@@ -76,18 +76,19 @@ int change_envp(t_envp *envp, char *str)
 {
     int i;
     int j;
-    char *name = NULL;
+    char *name;
     char *value;
 
     i = 0;
     j = 0;
+    name = NULL;
+    value = NULL;
     while (str[i])
     {
         if (str[i] == '=')
         {
             name = ft_substr(str, 0, i);
             j = i;
-            printf("name: %s\n", name);
             break;
         }
         i++;
@@ -99,9 +100,11 @@ int change_envp(t_envp *envp, char *str)
         while (str[i])
             i++;
         value = ft_substr(str, j + 1, i - j);
-        printf("value: %s\n", value);
         change_envp_value(envp, name, value);
         data.exit_status = 0;
+        free(name);
+        if (value)
+            free(value);
         return (1);
     }
     free(name);
@@ -153,7 +156,6 @@ void ft_export(t_envp **envp, char **argv)
     i = 1;
     while (argv[i])
     {
-        printf("%d: %s\n",i, argv[i]);
         ft_export_next_step(envp, argv[i]);
         i++;
     }

@@ -1,3 +1,35 @@
+
+int lookup_name_replace_value(t_envp *envp, char **value) // поиск и добавление в переменную окружения
+{
+	char **tmp;
+	int i;
+
+	tmp = (char **)malloc(sizeof(char *) * 2);
+	if (value[1])
+	{
+		printf("minishell: %s: command not found\n", value[1]);
+		data.exit_status = 127;
+		return (0);
+	}
+	i = ft_strchr(value[0], '=');
+	if (i == 0)
+		return (0);
+	tmp = ft_split(value[0], '=');
+	envp = search_name(envp, tmp[0]);
+	if (!envp)
+	{
+		free_mass(tmp);
+		return (0);
+	}
+	change_envp_value(envp, tmp[0], tmp[1]);
+	data.exit_status = 0;
+	free(tmp[0]); //возможно abort
+	free(tmp);
+	return (1);
+}
+
+////ft_export
+
 #include "../minishell.h"
 
 //без аргв в пайпах работает
@@ -151,3 +183,5 @@ void ft_export(t_envp **envp, char **argv)
 
 // dleaves@dleaves42:~/projects/git-mimi-01-03$ export abc 111
 // bash: export: `111': not a valid identifier
+
+///end

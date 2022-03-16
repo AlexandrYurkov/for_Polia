@@ -39,7 +39,6 @@ typedef struct s_list
     char *str_redir;
     char **cmd;
     int file_fd[2];
-    int heredoc;
 }   t_list;
 
 typedef struct s_data
@@ -53,8 +52,6 @@ typedef struct s_data
     t_envp *envp;
 }   t_data;
 
-// sig_t			SIG_INT;
-// sig_t			SIG_QUIT;
 t_data data;
 
 //my_part

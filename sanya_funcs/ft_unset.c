@@ -44,7 +44,7 @@ void delete_list(t_envp **list)
         del_list(&(*list));
 }
 
-void ft_unset_next_step(t_envp **envp, char *name) // удаление переменой 
+void ft_unset_next_step(t_envp **envp, char *name)
 {
     t_envp *tmp;
 
@@ -52,7 +52,7 @@ void ft_unset_next_step(t_envp **envp, char *name) // удаление пере�
     tmp = search_name(tmp, name);
     if(!tmp)
     {
-        printf("\n");
+        printf("");
         return ;
     }
     delete_list(&tmp);
@@ -66,6 +66,7 @@ void ft_unset(t_envp **envp, char **name)
     i = 0;
     while(name[++i])
         ft_unset_next_step(envp, name[i]);
-    // ft_array_envp(*envp, &data);
-    // data->exit_status = 0;
+    data.exit_status = 0;
 }
+
+//  Resource temporarily unavailable
