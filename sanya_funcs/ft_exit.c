@@ -1,10 +1,10 @@
 #include "../minishell.h"
 
-int        ft_strcheck(const char *s1, const char s2)
+int ft_strcheck(const char *s1, const char s2)
 {
     const unsigned char *p1;
-    p1 = (const unsigned char *)s1;
 
+    p1 = (const unsigned char *)s1;
     while (*p1)
     {
         if(*p1 == s2)
@@ -13,29 +13,12 @@ int        ft_strcheck(const char *s1, const char s2)
     }
     return (0);
 }
-char *ft_word(char *str)
-{
-    int i;
-    int j;
-    char *word;
-    word = malloc(ft_strlen(str) + 1);
-    i = 0;
-    j = 0;
-    while (str[i])
-    {
-        if(str[i] == '(' || str[i] == ')')
-            i++;
-        word[j++] = str[i++];
-    }
-    word[j] = '\0';
-    return (word);
-}
 
-char *check_bracket(char **av)
+char    *check_bracket(char **av)
 {
-    int i;
-    char *tmp1;
-    char *tmp2;
+    int     i;
+    char    *tmp1;
+    char    *tmp2;
     
     tmp1 = ft_strdup("(");
     tmp2 = ft_strdup(")");
@@ -53,9 +36,9 @@ char *check_bracket(char **av)
     return (NULL);
 }
 
-int    ft_isalldigit(char *str)
+int ft_isalldigit(char *str)
 {
-    int    i;
+    int i;
 
     i = 0;
     if (str[0] == '-')
@@ -69,37 +52,25 @@ int    ft_isalldigit(char *str)
     return (0);
 }
 
-int array_len(char **av)
-{
-    int i;
-
-    i = 0;
-    if(!av[1])
-        return (0);
-    while (av[i])
-        i++;
-    return (i - 1);
-}
-
-void ft_out(int value, int flag, char *av)
+void    ft_out(int value, int flag, char *av)
 {
     rl_clear_history();
     data.exit_status = (unsigned char)value;
     printf("exit\n");
     if (flag == 1)
-        printf("bash: exit: %s: numeric argument required\n", av);
+        printf("minishell: exit: %s: numeric argument required\n", av);
     if (flag == 2)
     {
-        printf("bash: exit: too many arguments\n");
+        printf("minishell: exit: too many arguments\n");
         return ;
     }
     exit (value);
 }
 
-void ft_exit(char **av)
+void    ft_exit(char **av)
 {
-    int i;
-    char *str;
+    int     i;
+    char    *str;
 
     if (!av)
         exit(0);

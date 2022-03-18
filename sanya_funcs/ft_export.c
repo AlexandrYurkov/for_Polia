@@ -1,30 +1,10 @@
 #include "../minishell.h"
 
-//без аргв в пайпах работает
-// с аргв не работает в пайпах
-
-int ft_isdigit_char(char c)
+t_envp  *export_new_name(t_envp *envp, char *name)
 {
-    return (c >= '0' && c <= '9');
-}
-
-void print_export(t_envp *list)
-{
-    while (list)
-    {
-        if (list->value == NULL)
-            printf("declare -x %s=\"\"\n", list->name);
-        else
-            printf("declare -x %s=\"%s\" \n", list->name, list->value);
-        list = list->next;
-    }
-}
-
-t_envp *export_new_name(t_envp *envp, char *name)
-{
-    char **tmp;
-    int check;
-    int i;
+    char    **tmp;
+    int     check;
+    int     i;
 
     i = 0;
     tmp = (char **)malloc(sizeof(char *) * 2);
@@ -47,11 +27,11 @@ t_envp *export_new_name(t_envp *envp, char *name)
     return (envp);
 }
 
-t_envp *copy_envp(t_envp *envp, t_envp *sort)
+t_envp  *copy_envp(t_envp *envp, t_envp *sort)
 {
-    t_envp *tmp;
-    char *name;
-    char *value;
+    t_envp  *tmp;
+    char    *name;
+    char    *value;
 
     tmp = envp;
     sort = NULL;
@@ -74,10 +54,10 @@ t_envp *copy_envp(t_envp *envp, t_envp *sort)
 
 int change_envp(t_envp *envp, char *str)
 {
-    int i;
-    int j;
-    char *name;
-    char *value;
+    int     i;
+    int     j;
+    char    *name;
+    char    *value;
 
     i = 0;
     j = 0;
@@ -113,9 +93,9 @@ int change_envp(t_envp *envp, char *str)
     return (0);
 }
 
-void ft_export_next_step(t_envp **envp, char *name)
+void    ft_export_next_step(t_envp **envp, char *name)
 {
-    t_envp *sort;
+    t_envp  *sort;
 
     if (name != NULL)
     {
@@ -131,7 +111,7 @@ void ft_export_next_step(t_envp **envp, char *name)
     data.exit_status = 0;
 }
 
-void ft_export(t_envp **envp, char **argv)
+void    ft_export(t_envp **envp, char **argv)
 {
     int i;
     int j;
@@ -141,7 +121,7 @@ void ft_export(t_envp **envp, char **argv)
     if (argv[1] == NULL)
     {
         ft_export_next_step(envp, NULL);
-        return;
+        return ;
     }
     while (argv[i])
     {
@@ -149,7 +129,7 @@ void ft_export(t_envp **envp, char **argv)
         {
             printf("minishell: export: `%s': not a valid identifier\n", argv[i]);
             data.exit_status = 1;
-            return;
+            return ;
         }
         i++;
     }
@@ -159,8 +139,5 @@ void ft_export(t_envp **envp, char **argv)
         ft_export_next_step(envp, argv[i]);
         i++;
     }
-    return;
+    return ;
 }
-
-// dleaves@dleaves42:~/projects/git-mimi-01-03$ export abc 111
-// bash: export: `111': not a valid identifier
