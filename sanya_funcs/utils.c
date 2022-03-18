@@ -47,3 +47,21 @@ char    *ft_word(char *str)
     word[j] = '\0';
     return (word);
 }
+
+char	*check_bracket_v2(char *av)
+{
+	char *tmp;
+	
+	tmp = NULL;
+	if (ft_strcheck(av, '('))
+		{
+			tmp = ft_strdup("(");
+			return (tmp);
+		}
+		if (ft_strcheck(av, ')'))
+		{
+			tmp = ft_strdup("(");
+			return (tmp);
+		}
+	return (tmp);
+}

@@ -187,4 +187,10 @@ int     ft_isdigit_char(char c);
 void    print_export(t_envp *list);
 int     array_len(char **av);
 char    *ft_word(char *str);
+char	*check_bracket(char **av);
+char	*check_bracket_v2(char *av);
+int     ft_strcheck(const char *s1, const char s2);
+int     change_envp(t_envp *envp, char *str);
+int     error_valid(char **argv, int i);
+
 #endif
