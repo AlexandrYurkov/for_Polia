@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_v2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfallon </var/mail/lfallon>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/19 15:58:24 by lfallon           #+#    #+#             */
+/*   Updated: 2022/03/19 15:58:27 by lfallon          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-int error_valid(char **argv, int i)
+int	error_valid(char **argv, int i)
 {
-	char *str;
+	char	*str;
 
 	str = check_bracket(argv);
 	if (str)
@@ -24,6 +36,7 @@ int error_valid(char **argv, int i)
 	}
 	return (0);
 }
+
 void	free_str(char *name, char *value)
 {
 	if (name)
@@ -34,7 +47,7 @@ void	free_str(char *name, char *value)
 
 char	*change_envp_error(char *str, int *i, int *j)
 {
-	char *name;
+	char	*name;
 
 	name = NULL;
 	while (str[*i])
@@ -43,19 +56,19 @@ char	*change_envp_error(char *str, int *i, int *j)
 		{
 			name = ft_substr(str, 0, *i);
 			*j = *i;
-			break;
+			break ;
 		}
 		*i = *i + 1;
 	}
 	return (name);
 }
 
-int change_envp(t_envp *envp, char *str)
+int	change_envp(t_envp *envp, char *str)
 {
-	int i;
-	int j;
-	char *name;
-	char *value;
+	int		i;
+	int		j;
+	char	*name;
+	char	*value;
 
 	i = 0;
 	j = 0;
@@ -76,4 +89,3 @@ int change_envp(t_envp *envp, char *str)
 	free_str(name, value);
 	return (0);
 }
-
